@@ -1,8 +1,3 @@
-
-import java.util.Scanner;
-import java.text.NumberFormat;
-
-
 //inputs:
 //	1-	staffType: 1:office		2:worker	3:Engineer
 //  2-	work Hours: 100-200
@@ -37,5 +32,7 @@ public class GrossPay {
             System.out.println("Gross Pay: " + grossPay);
             System.out.println("==========================");
         }
+        BarChart barChart = new BarChart();
+        barChart.drawBarChart();
     }
 }
