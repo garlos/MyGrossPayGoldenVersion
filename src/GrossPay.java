@@ -2,31 +2,29 @@
 import java.util.Scanner;
 import java.text.NumberFormat;
 
+
+    //inputs:
+        //	1-	staffType: 1:office		2:worker	3:Engineer
+        //  2-	work Hours: 100-200
+        //  3-	extra Hours: 0-50
+        //	4-	work Quality: 70-100
+//outputs:
+        //	grossPay = netPay + rewardPay - tax - insurance
+
+
 public class GrossPay {
-	public static void main(String[] args) {
 
-	//inputs:
-		//	1-	staffType: 1:office 2:worker	3:Engineer
-		//	2-	marriage type: 1:unmarried / 2:married
-		//	3-	Number of children: 1-3
-		//  4-	Work Hours: 100-200
-		//  5-	Extra Hours: 0-50
-		//	6-	Work Quality: 70-100
+    public static void main(String[] args) {
+        double grossPay;
+        double[][] dSet = new double[0][0];
+        int personCount = 10;
 
+        dSet = SetDataSet.setData(personCount, dSet);
 
-
-
-
-
-
-
-
-
-
-
-		/*
-		
-		NumberFormat fmt = NumberFormat.getCurrencyInstance();
-		System.out.println("Gross Pay: " + fmt.format(pay));*/
-	}
+        NetPayCalc netPaymentCalc = new NetPayCalc();
+        for (int i = 1; i <= 10; i++) {
+            grossPay = netPaymentCalc.netPayCalc(dSet[i][1], dSet[i][2], dSet[i][3], dSet[i][4]);
+            System.out.print(grossPay);
+        }
+    }
 }
