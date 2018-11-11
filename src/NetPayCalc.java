@@ -4,31 +4,32 @@ public class NetPayCalc {
     double rate = 0;
 
 
-    public double netPayCalc(double staffType, double hours, double exHours, double workQuality) {
+    public double netPayCalc(int staffType, int hours, int exHours, int workQuality) {
 
-        double exPay, netPay;
+        double exPay=0;
+        double netPay;
 
         if (staffType == 1) {
-            rate = 32.5;
+            rate = 1.6;
         } else if (staffType == 2) {
-            rate = 40.7;
+            rate = 2.2;
         } else if (staffType == 3) {
-            rate = 52;
+            rate = 3.1;
         }
 
-        if (exHours >= 20) {
-            exPay = exHours * (STANDARD * 2);
+
+        if ((hours >= 130) && ((exHours >= (hours*(25/100))) || (exHours >= 40))) {
+            netPay = (STANDARD * rate) + ((hours - exHours - STANDARD) * (rate * 1.5));
         } else {
-            exHours = 0.0;
-            exPay = 0.0;
+            netPay = STANDARD * rate + (exHours * (STANDARD*0.7));
         }
 
-        if ((hours >= 150) && (workQuality >= 85)) {
-            netPay = (STANDARD * rate) + ((hours - exHours - STANDARD) * (rate * 1.5)) + exPay;
-        } else {
-            netPay = STANDARD * rate;
+        if ((workQuality >= 80) || exHours >= 20) {
+            exPay = netPay * (30/100);
+
         }
 
+        netPay += netPay + exPay;
 
         return netPay;
     }
