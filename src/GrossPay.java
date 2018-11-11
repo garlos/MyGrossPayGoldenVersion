@@ -30,11 +30,15 @@ public class GrossPay {
             System.out.println("---------");
             System.out.println("Net Pay  : " + netPay);
 
-            grossPay = Math.round(netPay - TaxCalc.taxCalc(netPay));   // - tax ;
+            grossPay = Math.round(netPay - TaxCalc.taxCalc(netPay));   // grossPay = netPay - tax ;
             System.out.println("Gross Pay: " + grossPay);
             System.out.println("==========================");
         }
         BarChart barChart = new BarChart();
         barChart.drawBarChart();
+
+
+        ConvertImageToBinary.processImage("BarChart.jpg");
+
     }
 }
