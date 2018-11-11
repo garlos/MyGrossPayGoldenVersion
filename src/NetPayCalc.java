@@ -8,11 +8,11 @@ public class NetPayCalc {
 
         double exPay, netPay;
 
-        if(staffType == 1){
+        if (staffType == 1) {
             rate = 32.5;
-        } else if(staffType == 2) {
+        } else if (staffType == 2) {
             rate = 40.7;
-        } else if(staffType == 3) {
+        } else if (staffType == 3) {
             rate = 52;
         }
 

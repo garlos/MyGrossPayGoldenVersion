@@ -16,15 +16,24 @@ public class GrossPay {
 
     public static void main(String[] args) {
         double grossPay;
-        double[][] dSet = new double[0][0];
         int personCount = 10;
-
-        dSet = SetDataSet.setData(personCount, dSet);
-
+        double[][] dSet = new double[personCount][4];
         NetPayCalc netPaymentCalc = new NetPayCalc();
-        for (int i = 1; i <= 10; i++) {
-            grossPay = netPaymentCalc.netPayCalc(dSet[i][1], dSet[i][2], dSet[i][3], dSet[i][4]);
-            System.out.print(grossPay);
+
+        dSet = SetDataSet.setData(personCount, dSet);  // set DATA-SET for Person counts
+
+        for (int i = 0; i < personCount; i++) {
+            grossPay = netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]);
+            System.out.println(grossPay);
+        }
+        System.out.println("###################################");
+        for (int i = 0; i < personCount; i++) {
+
+            System.out.println(dSet[i][0]);
+            System.out.println(dSet[i][1]);
+            System.out.println(dSet[i][2]);
+            System.out.println(dSet[i][3]);
+            System.out.println("---------------------------");
         }
     }
 }

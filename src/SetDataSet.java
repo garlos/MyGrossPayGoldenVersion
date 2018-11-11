@@ -1,13 +1,11 @@
 public class SetDataSet {
 
-
-    public static double[][] setData(int count, double[][] dataSet) {
-        //double[][] dataSet = new double[0][3];
-        for (int i = 0; i <= count; i++) {
-            dataSet[i][1] = 1.0;
-            dataSet[i][2] = (((200 - 100) + 1)) + 100;
-            dataSet[i][3] = (((50) + 1));
-            dataSet[i][4] = (((100 - 70) + 1)) + 70;
+    public static double[][] setData(int pCount, double[][] dataSet) {
+        for (int i = 0; i < pCount; i++) {
+            dataSet[i][0] = Rand.intRandom(1, 3);
+            dataSet[i][1] = Rand.dblRandom(100, 200);
+            dataSet[i][2] = Rand.dblRandom(0, 50);
+            dataSet[i][3] = Rand.dblRandom(70, 100);
         }
         return dataSet;
     }
