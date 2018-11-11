@@ -25,9 +25,11 @@ public class GrossPay {
             System.out.println("work hours: " + dSet[i][1]);
             System.out.println("ex-hours  : " + dSet[i][2]);
             System.out.println("Quality   : " + dSet[i][3]);
+
             netPay = Math.round(netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]));
             System.out.println("---------");
             System.out.println("Net Pay  : " + netPay);
+
             grossPay = Math.round(netPay - TaxCalc.taxCalc(netPay));   // - tax ;
             System.out.println("Gross Pay: " + grossPay);
             System.out.println("==========================");

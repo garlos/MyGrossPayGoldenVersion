@@ -1,21 +1,49 @@
 import java.awt.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class BarChart extends JPanel {
     private double[] value;
     private String[] languages;
-    private String title;
 
-    public BarChart(double[] val, String[] lang, String t) {
+
+    public BarChart(double[] val, String[] lang) {
         languages = lang;
         value = val;
-        title = t;
     }
+
 
     public BarChart() {
 
     }
+
+
+    public void drawBarChart() {
+        JFrame frame = new JFrame();
+        frame.setSize(100, 100);
+        double[] value = new double[4];
+        value[0] = 99;
+        value[1] = 88;
+        value[2] = 20;
+        value[3] = 80;
+
+        frame.getContentPane().add(new BarChart(value, languages));
+
+        WindowListener winListener = new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                System.exit(0);
+            }
+        };
+        frame.addWindowListener(winListener);
+        frame.setVisible(true);
+
+        saveImage(frame);      // save BarChart as Image
+    }
+
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -37,17 +65,12 @@ public class BarChart extends JPanel {
         FontMetrics titleFontMetrics = graphics.getFontMetrics(titleFont);
         Font labelFont = new Font("Book Antiqua", Font.PLAIN, 10);
         FontMetrics labelFontMetrics = graphics.getFontMetrics(labelFont);
-        int titleWidth = titleFontMetrics.stringWidth(title);
-        int q = titleFontMetrics.getAscent();
-        int p = (clientWidth - titleWidth) / 2;
         graphics.setFont(titleFont);
-        graphics.drawString(title, p, q);
         int top = titleFontMetrics.getHeight();
         int bottom = labelFontMetrics.getHeight();
         if (maxValue == minValue)
             return;
         double scale = (clientHeight - top - bottom) / (maxValue - minValue);
-        q = clientHeight - labelFontMetrics.getDescent();
         graphics.setFont(labelFont);
 
         for (int j = 0; j < value.length; j++) {
@@ -61,43 +84,25 @@ public class BarChart extends JPanel {
                 height = -height;
             }
 
-            graphics.setColor(Color.blue);
-            graphics.fillRect(valueP, valueQ, barWidth , height);
             graphics.setColor(Color.black);
-            graphics.drawRect(valueP, valueQ, barWidth , height);
-            int labelWidth = labelFontMetrics.stringWidth(languages[j]);
-            p = j * barWidth + (barWidth - labelWidth) / 2;
-            graphics.drawString(languages[j], p, q);
+            graphics.fillRect(valueP, valueQ, barWidth, height);
+            graphics.setColor(Color.white);
+            graphics.drawRect(valueP, valueQ, barWidth, height);
         }
     }
 
-    public void drawBarChart() {
-        JFrame frame = new JFrame();
-        frame.setSize(350, 300);
-        double[] value = new double[4];
-        String[] languages = new String[4];
-        value[0] = 1.9;
-        languages[0] = "StaffType";
 
-        value[1] = 2;
-        languages[1] = "WorkHours";
-
-        value[2] = 5;
-        languages[2] = "ExHours";
-
-        value[3] = 4;
-        languages[3] = "Quality";
-
-//        value[4] = 5;
-//        languages[4] = "Java";
-        frame.getContentPane().add(new BarChart(value, languages, "Programming Languages"));
-
-        WindowListener winListener = new WindowAdapter() {
-            public void windowClosing(WindowEvent event) {
-                System.exit(0);
-            }
-        };
-        frame.addWindowListener(winListener);
-        frame.setVisible(true);
+    public void saveImage(JFrame frame) {
+        Dimension size = frame.getSize();
+        BufferedImage image = (BufferedImage) frame.createImage(size.width, size.height);
+        Graphics g = image.getGraphics();
+        frame.paint(g);
+        g.dispose();
+        try {
+            ImageIO.write(image, "jpg", new File("BarChart.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
