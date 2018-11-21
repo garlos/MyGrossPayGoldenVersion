@@ -19,7 +19,6 @@ public class GrossPay {
         dSet = SetDataSet.setData(personCount, dSet);  // set DATA-SET for Person counts
 
         for (int i = 0; i < personCount; i++) {
-
             System.out.println("No." + (i + 1));
             System.out.println("staff type: " + dSet[i][0]);
             System.out.println("work hours: " + dSet[i][1]);
@@ -27,18 +26,19 @@ public class GrossPay {
             System.out.println("Quality   : " + dSet[i][3]);
 
             netPay = Math.round(netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]));
-            System.out.println("---------");
-            System.out.println("Net Pay  : " + netPay);
+            /*System.out.println("---------");
+            System.out.println("Net Pay  : " + netPay);*/
 
             grossPay = Math.round(netPay - TaxCalc.taxCalc(netPay));   // grossPay = netPay - tax ;
             System.out.println("Gross Pay: " + grossPay);
             System.out.println("==========================");
+
+            BarChart barChart = new BarChart();
+            barChart.barChartImageGenerator(grossPay,dSet,i);
         }
-        BarChart barChart = new BarChart();
-        barChart.drawBarChart();
 
 
-        ConvertImageToBinary.processImage("BarChart.jpg");
+        //ConvertImageToBinary.processImage("BarChart.jpg");
 
     }
 }

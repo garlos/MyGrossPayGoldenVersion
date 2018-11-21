@@ -22,14 +22,14 @@ public class BarChart extends JPanel {
     }
 
 
-    public void drawBarChart() {
+    public void barChartImageGenerator(double grossPay, int[][] dSet, int i) {
         JFrame frame = new JFrame();
-        frame.setSize(100, 100);
+        frame.setSize(30, 147);
         double[] value = new double[4];
-        value[0] = 99;
-        value[1] = 88;
-        value[2] = 20;
-        value[3] = 80;
+        value[0] = dSet[i][0];
+        value[1] = dSet[i][1];
+        value[2] = dSet[i][2];
+        value[3] = dSet[i][3];
 
         frame.getContentPane().add(new BarChart(value, languages));
 
@@ -41,7 +41,8 @@ public class BarChart extends JPanel {
         frame.addWindowListener(winListener);
         frame.setVisible(true);
 
-        saveImage(frame);      // save BarChart as Image
+        saveImage(frame, grossPay);      // save BarChart as Image
+//        frame.setVisible(false);
     }
 
 
@@ -60,17 +61,17 @@ public class BarChart extends JPanel {
         Dimension dim = getSize();
         int clientWidth = dim.width;
         int clientHeight = dim.height;
-        int barWidth = clientWidth / value.length;
-        Font titleFont = new Font("Book Antiqua", Font.BOLD, 15);
+        int barWidth = (clientWidth / value.length);
+        Font titleFont = new Font("Book Antiqua", Font.BOLD, 1);
         FontMetrics titleFontMetrics = graphics.getFontMetrics(titleFont);
-        Font labelFont = new Font("Book Antiqua", Font.PLAIN, 10);
+        Font labelFont = new Font("Book Antiqua", Font.PLAIN, 1);
         FontMetrics labelFontMetrics = graphics.getFontMetrics(labelFont);
         graphics.setFont(titleFont);
         int top = titleFontMetrics.getHeight();
         int bottom = labelFontMetrics.getHeight();
         if (maxValue == minValue)
             return;
-        double scale = (clientHeight - top - bottom) / (maxValue - minValue);
+        double scale = (clientHeight) / (maxValue - minValue);
         graphics.setFont(labelFont);
 
         for (int j = 0; j < value.length; j++) {
@@ -92,14 +93,15 @@ public class BarChart extends JPanel {
     }
 
 
-    public void saveImage(JFrame frame) {
+    public void saveImage(JFrame frame, double grossPay) {
         Dimension size = frame.getSize();
         BufferedImage image = (BufferedImage) frame.createImage(size.width, size.height);
         Graphics g = image.getGraphics();
         frame.paint(g);
         g.dispose();
         try {
-            ImageIO.write(image, "jpg", new File("BarChart.jpg"));
+            int gross = (int) grossPay;
+            ImageIO.write(image, "jpg", new File("./img/" + gross + ".jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
