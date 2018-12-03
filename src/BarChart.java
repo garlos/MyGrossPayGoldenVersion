@@ -16,20 +16,25 @@ public class BarChart extends JPanel {
         value = val;
     }
 
-
     public BarChart() {
 
     }
 
+    public void barChartGenerator(double grossPay, double[][] dSet, int i) {
 
-    public void barChartImageGenerator(double grossPay, int[][] dSet, int i) {
         JFrame frame = new JFrame();
         frame.setSize(30, 147);
-        double[] value = new double[4];
-        value[0] = dSet[i][0];
-        value[1] = dSet[i][1];
-        value[2] = dSet[i][2];
-        value[3] = dSet[i][3];
+        double[] value = new double[6];
+
+        /*normalize DataSet to Percentage before drawing Bar chart*/
+        value[0] = 100;
+
+        value[1] = NormalizeToPercentage.normalize(dSet[i][0] * 34, 0, 100, 0, 100);
+        value[2] = NormalizeToPercentage.normalize(dSet[i][1], 150, 200, 0, 100);
+        value[3] = NormalizeToPercentage.normalize(dSet[i][2], 0, 50, 0, 100);
+        value[4] = NormalizeToPercentage.normalize(dSet[i][3], 70, 90, 0, 100);
+
+        value[5] = 100;
 
         frame.getContentPane().add(new BarChart(value, languages));
 
@@ -39,12 +44,14 @@ public class BarChart extends JPanel {
             }
         };
         frame.addWindowListener(winListener);
+
         frame.setVisible(true);
 
-        saveImage(frame, grossPay);      // save BarChart as Image
-//        frame.setVisible(false);
-    }
+        /*save BarChart as Image*/
+        saveImage(frame, grossPay);
 
+        frame.setVisible(false);
+    }
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -52,11 +59,11 @@ public class BarChart extends JPanel {
             return;
         double minValue = 0;
         double maxValue = 0;
-        for (int i = 0; i < value.length; i++) {
-            if (minValue > value[i])
-                minValue = value[i];
-            if (maxValue < value[i])
-                maxValue = value[i];
+        for (double aValue : value) {
+            if (minValue > aValue)
+                minValue = aValue;
+            if (maxValue < aValue)
+                maxValue = aValue;
         }
         Dimension dim = getSize();
         int clientWidth = dim.width;
@@ -100,11 +107,12 @@ public class BarChart extends JPanel {
         frame.paint(g);
         g.dispose();
         try {
-            int gross = (int) grossPay;
+            double gross = Math.round(grossPay * 100) / 100.0;
             ImageIO.write(image, "jpg", new File("./img/" + gross + ".jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 }

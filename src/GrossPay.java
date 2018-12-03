@@ -9,14 +9,15 @@
 
 public class GrossPay {
 
+
     public static void main(String[] args) {
         double grossPay;
         double netPay;
-        int personCount = 100;
-        int[][] dSet = new int[personCount][4];
+        int personCount = 500;
+        double[][] dSet = new double[personCount][4];
         NetPayCalc netPaymentCalc = new NetPayCalc();
 
-        dSet = SetDataSet.setData(personCount, dSet);  // set DATA-SET for Person counts
+        dSet = SetDataSet.setData(personCount, dSet);  // set DataSet for personCount
 
         for (int i = 0; i < personCount; i++) {
             System.out.println("No." + (i + 1));
@@ -25,20 +26,20 @@ public class GrossPay {
             System.out.println("ex-hours  : " + dSet[i][2]);
             System.out.println("Quality   : " + dSet[i][3]);
 
-            netPay = Math.round(netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]));
+
+            netPay = netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]);
             /*System.out.println("---------");
             System.out.println("Net Pay  : " + netPay);*/
 
-            grossPay = Math.round(netPay - TaxCalc.taxCalc(netPay));   // grossPay = netPay - tax ;
+            grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100) / 100.0;   // {{grossPay = netPay - tax}} ;
             System.out.println("Gross Pay: " + grossPay);
             System.out.println("==========================");
 
             BarChart barChart = new BarChart();
-            barChart.barChartImageGenerator(grossPay,dSet,i);
+            barChart.barChartGenerator(grossPay, dSet, i);
+
+            //ConvertImageToBinary.processImage("BarChart.jpg");
+
         }
-
-
-        //ConvertImageToBinary.processImage("BarChart.jpg");
-
     }
 }

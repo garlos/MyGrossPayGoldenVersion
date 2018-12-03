@@ -1,12 +1,12 @@
 public class NetPayCalc {
 
-    final double STANDARD = 40;
+    final double STANDARD = 4;
     double rate = 0;
 
 
-    public double netPayCalc(int staffType, int hours, int exHours, int workQuality) {
+    public double netPayCalc(double staffType, double hours, double exHours, double workQuality) {
 
-        double exPay=0;
+        double exPay = 0;
         double netPay;
 
         if (staffType == 1) {
@@ -17,19 +17,15 @@ public class NetPayCalc {
             rate = 3.1;
         }
 
+        netPay = (hours * (STANDARD * rate)) + (exHours * (rate * (STANDARD * 2)));
 
-        if ((hours >= 130) && ((exHours >= (hours*(25/100))) || (exHours >= 40))) {
-            netPay = (STANDARD * rate) + ((hours - exHours - STANDARD) * (rate * 1.5));
-        } else {
-            netPay = STANDARD * rate + (exHours * (STANDARD*0.7));
+        if ((exHours >= 25) && (workQuality >= 90)) {
+             exPay += (exHours - 25) * (STANDARD * rate);     //reward
+        } else if ((exHours >= 20) || (workQuality >= 80)) {
+            netPay += 200;
         }
 
-        if ((workQuality >= 80) || exHours >= 20) {
-            exPay = netPay * (30/100);
-
-        }
-
-        netPay += netPay + exPay;
+        netPay += exPay;
 
         return netPay;
     }
