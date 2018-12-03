@@ -13,7 +13,7 @@ public class GrossPay {
     public static void main(String[] args) {
         double grossPay;
         double netPay;
-        int personCount = 500;
+        int personCount = 2000;
         double[][] dSet = new double[personCount][4];
         NetPayCalc netPaymentCalc = new NetPayCalc();
 
@@ -25,7 +25,6 @@ public class GrossPay {
             System.out.println("work hours: " + dSet[i][1]);
             System.out.println("ex-hours  : " + dSet[i][2]);
             System.out.println("Quality   : " + dSet[i][3]);
-
 
             netPay = netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]);
             /*System.out.println("---------");
