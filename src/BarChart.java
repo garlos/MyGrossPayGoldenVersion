@@ -31,10 +31,10 @@ public class BarChart extends JPanel {
         /*normalize DataSet to Percentage before drawing Bar chart*/
         value[0] = 100;     // to adjust first bar to 100
 
-        value[1] = NormalizeToPercentage.normalize(dSet[i][0] * 34, 0, 100, 0, 100);
-        value[2] = NormalizeToPercentage.normalize(dSet[i][1], 150, 200, 0, 100);
-        value[3] = NormalizeToPercentage.normalize(dSet[i][2], 0, 50, 0, 100);
-        value[4] = NormalizeToPercentage.normalize(dSet[i][3], 70, 90, 0, 100);
+        value[1] = NormToPercent.normalize(dSet[i][0] * 34, 0, 100, 0, 100);
+        value[2] = NormToPercent.normalize(dSet[i][1], 150, 200, 0, 100);
+        value[3] = NormToPercent.normalize(dSet[i][2], 0, 50, 0, 100);
+        value[4] = NormToPercent.normalize(dSet[i][3], 70, 90, 0, 100);
 
         value[5] = 100;     // to adjust last bar to 100
 
