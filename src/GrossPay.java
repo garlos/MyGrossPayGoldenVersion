@@ -13,11 +13,11 @@ public class GrossPay {
     public static void main(String[] args) {
         double grossPay;
         double netPay;
-        int personCount = 2000;
+        int personCount = 20;
         double[][] dSet = new double[personCount][4];
         NetPayCalc netPaymentCalc = new NetPayCalc();
 
-        dSet = SetDataSet.setData(personCount, dSet);  // set DataSet for personCount
+        dSet = SetDataSet.setData(personCount, dSet);  // set DataSet for all personCount
 
         for (int i = 0; i < personCount; i++) {
             System.out.println("No." + (i + 1));
@@ -27,8 +27,9 @@ public class GrossPay {
             System.out.println("Quality   : " + dSet[i][3]);
 
             netPay = netPaymentCalc.netPayCalc(dSet[i][0], dSet[i][1], dSet[i][2], dSet[i][3]);
-            /*System.out.println("---------");
-            System.out.println("Net Pay  : " + netPay);*/
+            System.out.println("---------");
+            netPay = Math.round((netPay * 100) / 100.0);
+            System.out.println("Net Pay  : " + netPay);
 
             grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100) / 100.0;   // {{grossPay = netPay - tax}} ;
             System.out.println("Gross Pay: " + grossPay);
@@ -37,7 +38,6 @@ public class GrossPay {
             BarChart barChart = new BarChart();
             barChart.barChartGenerator(grossPay, dSet, i);
 
-            //ConvertImageToBinary.processImage("BarChart.jpg");
 
         }
     }
