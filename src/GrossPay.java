@@ -21,7 +21,6 @@ public class GrossPay {
 
 
         for (int i = 0; i < personCount; i++) {
-            System.out.print("salam");
             System.out.println("No." + (i + 1));
             System.out.println("staff type: " + dSet[i][0]);
             System.out.println("work hours: " + dSet[i][1]);
