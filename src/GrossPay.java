@@ -13,13 +13,15 @@ public class GrossPay {
     public static void main(String[] args) {
         double grossPay;
         double netPay;
-        int personCount = 20;
+        int personCount = 4000;
         double[][] dSet = new double[personCount][4];
         NetPayCalc netPaymentCalc = new NetPayCalc();
 
         dSet = SetDataSet.setData(personCount, dSet);  // set DataSet for all personCount
 
+
         for (int i = 0; i < personCount; i++) {
+            System.out.print("salam");
             System.out.println("No." + (i + 1));
             System.out.println("staff type: " + dSet[i][0]);
             System.out.println("work hours: " + dSet[i][1]);
