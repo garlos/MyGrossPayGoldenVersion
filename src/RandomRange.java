@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Rand {
+public class RandomRange {
 
     static public double dblRandom(double min, double max) {
         if (min >= max) {
