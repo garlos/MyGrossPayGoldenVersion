@@ -9,12 +9,10 @@ public class NetPayCalc {
         double exPay = 0;
         double netPay;
 
-        if (staffType == 1) {
-            rate = 1.6;
-        } else if (staffType == 2) {
-            rate = 2.2;
-        } else if (staffType == 3) {
-            rate = 3.1;
+        switch((int)staffType){
+            case 1:             rate = 1.6;
+            case 2:             rate = 2.2;
+            case 3:             rate = 3.1;
         }
 
         netPay = (hours * (STANDARD * rate)) + (exHours * (rate * (STANDARD * 2)));
